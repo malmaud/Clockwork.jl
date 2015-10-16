@@ -1,4 +1,4 @@
-module CoolClocks
+module Clockwork
 
 export Clock
 import Base: +, *, ^, -

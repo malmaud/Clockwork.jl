@@ -1,17 +1,17 @@
-# CoolClocks
+# Clockwork
 
 
-[![Build Status](https://travis-ci.org/malmaud/CoolClocks.jl.svg?branch=master)](https://travis-ci.org/malmaud/CoolClocks.jl)
+[![Build Status](https://travis-ci.org/malmaud/Clockwork.jl.svg?branch=master)](https://travis-ci.org/malmaud/Clockwork.jl)
 
 
-[![codecov.io](http://codecov.io/github/malmaud/CoolClocks.jl/coverage.svg?branch=master)](http://codecov.io/github/malmaud/CoolClocks.jl?branch=master)
+[![codecov.io](http://codecov.io/github/malmaud/Clockwork.jl/coverage.svg?branch=master)](http://codecov.io/github/malmaud/Clockwork.jl?branch=master)
 
 Basics
 ---
 Do all your favorite clock things:
 
 ```julia
-using CoolClocks
+using Clockwork
 @test 🕟+🕝== 🕔 # 3:30 + 1:30 == 5:00
 @test 🕑^50 == 🕓
 @test Clock("3:30") == 🕟
@@ -22,12 +22,12 @@ end
 
 ```
 
-Clock algebra (Clockgebra)
+Clock algebra
 ----
 
 ```julia
 julia> hooks_nightmare = rand(Clock,10,10)
-10x10 Array{CoolClocks.Clock,2}:
+10x10 Array{Clockwork.Clock,2}:
  🕠  🕢  🕙  🕧  🕦  🕧  🕙  🕘  🕚  🕝
  🕔  🕛  🕔  🕢  🕤  🕥  🕥  🕢  🕦  🕣
  🕓  🕒  🕐  🕝  🕐  🕥  🕘  🕙  🕦  🕕
@@ -39,7 +39,7 @@ julia> hooks_nightmare = rand(Clock,10,10)
  🕕  🕗  🕝  🕧  🕧  🕥  🕕  🕓  🕤  🕘
  🕒  🕓  🕥  🕧  🕣  🕔  🕥  🕘  🕥  🕟
 julia> hooks_nightmare * rand(Clock, 10, 2)
-10x2 Array{CoolClocks.Clock,2}:
+10x2 Array{Clockwork.Clock,2}:
  🕝  🕠
  🕗  🕑
  🕝  🕔

@@ -1,4 +1,4 @@
-The CoolClocks.jl package is licensed under the MIT "Expat" License:
+The Clockwork.jl package is licensed under the MIT "Expat" License:
 
 > Copyright (c) 2015: Jon Malmaud.
 > 
