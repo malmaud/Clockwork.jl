@@ -13,11 +13,7 @@ Clock(hour::Integer) = Clock(Int(hour), false)
 const glyph_for_clock = Dict{Clock, Symbol}()
 for i=1:12
     s1 = symbol(Char(0x1F550+(i-1)))
-    if i==12
-        s2 = symbol("\U1F567")
-    else
-        s2 = symbol(Char(0x1F550+(i-1)+13))
-    end
+    s2 = symbol(Char(0x1F550+(i-1)+12))
     t1 = Clock(i, false)
     t2 = Clock(i, true)
     @eval $s1=$t1
@@ -27,11 +23,11 @@ for i=1:12
     @eval export $s1, $s2
 end
 
-for op in [:+, :-]
+for (op, carry) in [(:+, 1), (:-, -1)]
     @eval begin
         function $op(c1::Clock, c2::Clock)
             if c1.on_minute && c2.on_minute
-                hour, on_minute = $op(c1.hour, c2.hour, 1), false
+                hour, on_minute = $op(c1.hour, c2.hour)+$carry, false
             elseif !c1.on_minute && !c2.on_minute
                 hour, on_minute = $op(c1.hour, c2.hour), false
             else
@@ -68,7 +64,7 @@ function Base.convert(::Type{Dates.CompoundPeriod}, c::Clock)
     if c.on_minute
         d += Dates.Minute(30)
     end
-    d
+    Dates.CompoundPeriod(d)
 end
 
 function Base.convert(::Type{DateTime}, c::Clock)
