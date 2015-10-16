@@ -99,4 +99,9 @@ function Base.convert(::Type{Clock}, fmt::AbstractString)
     convert(Clock, dt)
 end
 
+Base.zero(::Type{Clock}) = Clock(12, false)
+Base.one(::Type{Clock}) = Clock(1, false)
+
+Base.rand(rng, ::Type{Clock}) = Clock(rand(rng, 1:12), rand(rng, Bool))
+
 end # module
