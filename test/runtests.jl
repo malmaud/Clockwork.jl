@@ -1,4 +1,4 @@
-using CoolClocks
+using Clockwork
 using Base.Test
 
 @test 🕟+🕝== 🕖
