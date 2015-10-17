@@ -16,8 +16,8 @@ for i=1:12
     s2 = symbol(Char(0x1F550+(i-1)+12))
     t1 = Clock(i, false)
     t2 = Clock(i, true)
-    @eval $s1=$t1
-    @eval $s2=$t2
+    @eval const $s1=$t1
+    @eval const $s2=$t2
     glyph_for_clock[t1] = s1
     glyph_for_clock[t2] = s2
     @eval export $s1, $s2
