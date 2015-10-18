@@ -88,7 +88,7 @@ for op in [:_hour, :_minute]
 end
 
 Base.convert(::Type{Clock}, d::Dates.AbstractTime) =
-  Clock(_hour(d), _minute(d)==30)
+  Clock(mod1(_hour(d), 12), _minute(d)==30)
 
 function Base.convert(::Type{Clock}, fmt::AbstractString)
     dt = DateTime(fmt,"H:M")
