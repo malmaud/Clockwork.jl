@@ -12,8 +12,8 @@ Clock(hour::Integer) = Clock(Int(hour), false)
 
 const glyph_for_clock = Dict{Clock, Symbol}()
 for i=1:12
-    s1 = symbol(Char(0x1F550+(i-1)))
-    s2 = symbol(Char(0x1F550+(i-1)+12))
+    s1 = Symbol(Char(0x1F550+(i-1)))
+    s2 = Symbol(Char(0x1F550+(i-1)+12))
     t1 = Clock(i, false)
     t2 = Clock(i, true)
     @eval const $s1=$t1
@@ -79,8 +79,8 @@ Base.DateTime(c::Clock) = convert(DateTime, c)
 
 _hour(d::Dates.DateTime) = Dates.hour(d)
 _minute(d::Dates.DateTime) = Dates.minute(d)
-_hour(d::Dates.Hour) = Int(d)
-_minute(d::Dates.Minute) = Int(d)
+_hour(d::Dates.Hour) = Dates.value(d)
+_minute(d::Dates.Minute) = Dates.value(d)
 _hour(x) = 0
 _minute(x) = 0
 for op in [:_hour, :_minute]
