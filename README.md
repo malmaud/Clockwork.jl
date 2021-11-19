@@ -1,11 +1,6 @@
 # Clockwork
 
 
-[![Build Status](https://travis-ci.org/malmaud/Clockwork.jl.svg?branch=master)](https://travis-ci.org/malmaud/Clockwork.jl)
-
-
-[![codecov.io](http://codecov.io/github/malmaud/Clockwork.jl/coverage.svg?branch=master)](http://codecov.io/github/malmaud/Clockwork.jl?branch=master)
-
 Basics
 ---
 Do all your favorite clock things:
