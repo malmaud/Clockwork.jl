@@ -3,7 +3,7 @@ module Clockwork
 export Clock
 import Base: +, *, ^, -
 
-immutable Clock
+struct Clock
     hour::Int
     on_minute::Bool
 end
