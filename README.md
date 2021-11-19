@@ -1,5 +1,6 @@
 # Clockwork
 
+![CI passing](https://github.com/malmaud/Clockwork.jl/actions/workflows/ci.yml/badge.svg)
 
 Basics
 ---
