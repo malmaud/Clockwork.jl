@@ -3,6 +3,8 @@ module Clockwork
 export Clock
 import Base: +, *, ^, -
 
+using Dates
+
 struct Clock
     hour::Int
     on_minute::Bool
@@ -59,23 +61,26 @@ function Base.show(io::IO, c::Clock)
     print(io, glyph_for_clock[c])
 end
 
-function Base.convert(::Type{Dates.CompoundPeriod}, c::Clock)
+function Dates.CompoundPeriod(c::Clock)
     d = Dates.Hour(c.hour)
     if c.on_minute
         d += Dates.Minute(30)
+    else
+        d += Dates.Minute(0)
     end
-    Dates.CompoundPeriod(d)
+    d
 end
 
-function Base.convert(::Type{DateTime}, c::Clock)
+function Dates.DateTime(c::Clock)
     args = Any[Dates.Hour(c.hour)]
     if c.on_minute
         push!(args, Dates.Minute(30))
+    else
+        push!(args, Dates.Minute(0))
     end
     DateTime(args...)
 end
 
-Base.DateTime(c::Clock) = convert(DateTime, c)
 
 _hour(d::Dates.DateTime) = Dates.hour(d)
 _minute(d::Dates.DateTime) = Dates.minute(d)
@@ -83,16 +88,17 @@ _hour(d::Dates.Hour) = Dates.value(d)
 _minute(d::Dates.Minute) = Dates.value(d)
 _hour(x) = 0
 _minute(x) = 0
+
 for op in [:_hour, :_minute]
     @eval $op(d::Dates.CompoundPeriod) = sum(map($op, d.periods))
 end
 
-Base.convert(::Type{Clock}, d::Dates.AbstractTime) =
-  Clock(mod1(_hour(d), 12), _minute(d)==30)
+function Clock(d::Dates.AbstractTime)
+    Clock(mod1(_hour(d), 12), _minute(d)==30)
+end
 
-function Base.convert(::Type{Clock}, fmt::AbstractString)
-    dt = DateTime(fmt,"H:M")
-    convert(Clock, dt)
+function Clock(fmt::AbstractString)
+    Clock(DateTime(fmt,"H:M"))
 end
 
 Base.zero(::Type{Clock}) = Clock(12, false)
